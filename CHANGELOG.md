@@ -7,5 +7,8 @@ It is also important to note the lack of testing and any current plan for the pr
 My next steps will be to write the appropriate unit tests for the current code.
 From there, I will take a TDD approach to development.
 
-# TODO next
-Create unit tests and adequately ensure my current code is functioning as intended.
+## 04/01/2019 - 04/02/2019
+Completed the addition of some unit tests to validate deletion and node count. Completed the addition of a deletion feature using two functions, check_bid_for_deletion and delete_bid. This function use a recursive algorithm to not only delete the bid object, but to set the left and right pointers appropriately.
+
+# TODO
+Complete a basic MongoDB integration with CRUD operations available.
