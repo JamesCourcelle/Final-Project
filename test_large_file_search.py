@@ -30,10 +30,14 @@ class TestLargeFile(unittest.TestCase):
         bst.load_bids(csv_path)
 
         current_node = bst.root
-        test_nodes = [79519, 98912, 98854, 98479, 97236, 86371, 84540] # First value is lowest ID #, second is highest ID #, additional values are randomly taken
+        test_nodes = [79519, 98912, 98854,
+                      98479, 97236, 86371,
+                      84540, 100, 200,
+                      98817, 96293, 94435] # First value is lowest ID #, second is highest ID #, additional values are randomly taken
 
-        current_bid = bst.search_tree(98854)
-        print(current_bid.left.bid.bid_id, current_bid.right.bid.bid_id)            
+        for i in test_nodes:
+            deleted_bid = bst.check_bid_for_deletion(bst.root, i)
+            self.assertEqual(bst.search_tree(i), None)
 
 if __name__ == '__main__':
     unittest.main()

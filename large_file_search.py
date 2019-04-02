@@ -90,33 +90,35 @@ class BinarySearchTree():
             if current_node == None:
                 return None
 
+    # Function to check if a bid for deletion is found. This function acts as the actual
+    # deletion of the found bid along with validating the input.
+    def check_bid_for_deletion(self, bid, bid_id):
+        if self.search_tree(bid_id) is None:
+            return "No bid found for deletion..."
+        else:
+            deleted_bid = self.delete_bid(bid, bid_id)
+            deleted_bid.bid = None
+            return "Bid successfully deleted..."
+      
 
-    #TODO Input validation needed       
+    # This function runs in check_bid_for_deletion method.    
     def delete_bid(self, bid, bid_id):
         parent = None
         current_bid = bid
+
         if current_bid is None:
             return None
 
         while (current_bid != None):
-            
-            print("loop start\n")
             if current_bid.bid.bid_id == bid_id:
                 if current_bid.left == None and current_bid.right == None:
-                    print("1st triggered")
-                    print(current_bid.bid.bid_id)
                     if parent.bid == None:
-                        print("1st 1st triggered")
                         current_bid = None
                     elif parent.left == current_bid:
-                        print("1st 2nd triggered")
                         parent.left = None
                     else:
-                        print("1st 3rd triggered")
                         parent.right = None
                 elif current_bid.left != None and current_bid.right == None:
-                    print("2nd triggered")
-                    print(current_bid.bid.bid_id)
                     if parent == None:
                         current_bid = current_bid.left
                     elif parent.left == current_bid:
@@ -124,8 +126,6 @@ class BinarySearchTree():
                     else:
                         parent.right = current_bid.left
                 elif current_bid.left == None and current_bid.right != None:
-                    print("3rd triggered")
-                    print(current_bid.bid.bid_id)
                     if parent == None:
                         current_bid = parent.right
                     elif parent.left == current_bid:
@@ -133,34 +133,17 @@ class BinarySearchTree():
                     else:
                         parent.right = current_bid.right
                 else:
-                    print("4th triggered")
-                    print(current_bid.bid.bid_id)
-                    print(current_bid.right.bid.bid_id)
-                    print(current_bid.left.bid.bid_id)
                     successor = current_bid.right
-                    print(successor.bid.bid_id)
-                    #print(successor.right.bid.bid_id)
-                    #print(successor.left.bid.bid_id)
                     while successor.left is not None:
-                        print("There is a left node")
                         successor = successor.left
-                    print("testing current after succesor", current_bid.bid.bid_id)
-                    print("Recursive start")
                     self.delete_bid(successor, current_bid.bid.bid_id)
-                    print("Recursive finish")
                 return current_bid
             elif current_bid.bid.bid_id < bid_id:
-                print("6th triggered")
-                print(current_bid.bid.bid_id)
                 parent = current_bid
                 current_bid = current_bid.right
-                #print("Current bid on left is", current_bid.bid.bid_id)
             else:
-                print("7th triggered")
-                print(current_bid.bid.bid_id)
                 parent = current_bid
                 current_bid = current_bid.left
-                #print("Current bid on left is", current_bid.bid.bid_id)
             
 
 if __name__ == "__main__":    
@@ -192,7 +175,6 @@ if __name__ == "__main__":
                 print("No bid found...")
         elif user_choice is 4:
             deleted_bid = int(input("Enter a Bid ID: "))
-            deleted_bid = bst.delete_bid(bst.root, deleted_bid)
-            print("This was returned", deleted_bid.bid.bid_id)
-            deleted_bid.bid = None
+            deleted_bid = bst.check_bid_for_deletion(bst.root, deleted_bid)
+            print(deleted_bid)
     
