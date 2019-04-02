@@ -32,9 +32,8 @@ class TestLargeFile(unittest.TestCase):
         current_node = bst.root
         test_nodes = [79519, 98912, 98854, 98479, 97236, 86371, 84540] # First value is lowest ID #, second is highest ID #, additional values are randomly taken
 
-        for i in test_nodes:
-            current_bid = bst.search_tree(i)
-            
+        current_bid = bst.search_tree(98854)
+        print(current_bid.left.bid.bid_id, current_bid.right.bid.bid_id)            
 
 if __name__ == '__main__':
     unittest.main()

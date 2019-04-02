@@ -93,52 +93,75 @@ class BinarySearchTree():
 
     #TODO Input validation needed       
     def delete_bid(self, bid, bid_id):
-        
         parent = None
-        current_bid = self.root
+        current_bid = bid
+        if current_bid is None:
+            return None
 
         while (current_bid != None):
-            try:
-                if current_bid.bid.bid_id == bid_id:
-                    if current_bid.left == None and current_bid.right == None:
-                        if parent == None:
-                            current_bid.bid = None
-                            current_bid.left = None
-                            current_bid.right = None
-                        elif parent.left == current_bid:
-                            parent.left = None
-                        else:
-                            parent.right = None
-                    elif current_bid.left != None and current_bid.right == None:
-                        if parent == None:
-                            current_bid = current_bid.left
-                        elif parent.left == current_bid:
-                            parent.left = current_bid.left
-                        else:
-                            parent.right = current_bid.left
-                    elif current_bid.left == None and current_bid.right != None:
-                        if parent == None:
-                            current_bid = parent.right
-                        elif parent.left == current_bid:
-                            parent.left = current_bid.right
-                        else:
-                            parent.right = current_bid.right
+            
+            print("loop start\n")
+            if current_bid.bid.bid_id == bid_id:
+                if current_bid.left == None and current_bid.right == None:
+                    print("1st triggered")
+                    print(current_bid.bid.bid_id)
+                    if parent.bid == None:
+                        print("1st 1st triggered")
+                        current_bid = None
+                    elif parent.left == current_bid:
+                        print("1st 2nd triggered")
+                        parent.left = None
                     else:
-                        successor = current_bid.right
-                        while successor.left != None:
-                            successor = successor.left
-                        current_bid = successor
-                        delete_bid(current_bid.right, successor.bid.bid_id)
-                    return current_bid
-                elif current_bid.bid.bid_id < bid_id:
-                    parent = current_bid
-                    current_bid = current_bid.right
+                        print("1st 3rd triggered")
+                        parent.right = None
+                elif current_bid.left != None and current_bid.right == None:
+                    print("2nd triggered")
+                    print(current_bid.bid.bid_id)
+                    if parent == None:
+                        current_bid = current_bid.left
+                    elif parent.left == current_bid:
+                        parent.left = current_bid.left
+                    else:
+                        parent.right = current_bid.left
+                elif current_bid.left == None and current_bid.right != None:
+                    print("3rd triggered")
+                    print(current_bid.bid.bid_id)
+                    if parent == None:
+                        current_bid = parent.right
+                    elif parent.left == current_bid:
+                        parent.left = current_bid.right
+                    else:
+                        parent.right = current_bid.right
                 else:
-                    parent = current_bid
-                    current_bid = current_bid.left
-            except:
-                print("Deletion failed...")
-        
+                    print("4th triggered")
+                    print(current_bid.bid.bid_id)
+                    print(current_bid.right.bid.bid_id)
+                    print(current_bid.left.bid.bid_id)
+                    successor = current_bid.right
+                    print(successor.bid.bid_id)
+                    #print(successor.right.bid.bid_id)
+                    #print(successor.left.bid.bid_id)
+                    while successor.left is not None:
+                        print("There is a left node")
+                        successor = successor.left
+                    print("testing current after succesor", current_bid.bid.bid_id)
+                    print("Recursive start")
+                    self.delete_bid(successor, current_bid.bid.bid_id)
+                    print("Recursive finish")
+                return current_bid
+            elif current_bid.bid.bid_id < bid_id:
+                print("6th triggered")
+                print(current_bid.bid.bid_id)
+                parent = current_bid
+                current_bid = current_bid.right
+                #print("Current bid on left is", current_bid.bid.bid_id)
+            else:
+                print("7th triggered")
+                print(current_bid.bid.bid_id)
+                parent = current_bid
+                current_bid = current_bid.left
+                #print("Current bid on left is", current_bid.bid.bid_id)
+            
 
 if __name__ == "__main__":    
     bst = BinarySearchTree()
@@ -169,5 +192,7 @@ if __name__ == "__main__":
                 print("No bid found...")
         elif user_choice is 4:
             deleted_bid = int(input("Enter a Bid ID: "))
-            bst.delete_bid(bst.root, deleted_bid)
+            deleted_bid = bst.delete_bid(bst.root, deleted_bid)
+            print("This was returned", deleted_bid.bid.bid_id)
+            deleted_bid.bid = None
     
