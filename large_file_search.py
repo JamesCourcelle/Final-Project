@@ -1,5 +1,6 @@
 from operator import itemgetter
 import parse_csv
+import file_output
 
 
 class Bid():
@@ -72,10 +73,8 @@ class BinarySearchTree():
         if self.root is None:
             print("No file loaded...")
             return
-
         current_node = self.root
         found = False
-        
         while not found:
             # This is statement handles if a bid has been deleted.
             if current_node.bid == None:
@@ -94,57 +93,56 @@ class BinarySearchTree():
     # deletion of the found bid along with validating the input.
     def check_bid_for_deletion(self, bid, bid_id):
         if self.search_tree(bid_id) is None:
+            print("deletion failed i think")
             return "No bid found for deletion..."
         else:
+            print("Deletion triggered i think")
             deleted_bid = self.delete_bid(bid, bid_id)
-            deleted_bid.bid = None
             return "Bid successfully deleted..."
-      
+
+    def minimum_value_bid(self, bid):
+        current_bid = bid
+        while current_bid.left is not None:
+            current_bid = current_bid.left
+
+        return current_bid
+            
 
     # This function runs in check_bid_for_deletion method.    
     def delete_bid(self, bid, bid_id):
-        parent = None
-        current_bid = bid
-
-        if current_bid is None:
+        # Setting up base case
+        if bid is None:
             return None
 
-        while (current_bid != None):
-            if current_bid.bid.bid_id == bid_id:
-                if current_bid.left == None and current_bid.right == None:
-                    if parent.bid == None:
-                        current_bid = None
-                    elif parent.left == current_bid:
-                        parent.left = None
-                    else:
-                        parent.right = None
-                elif current_bid.left != None and current_bid.right == None:
-                    if parent == None:
-                        current_bid = current_bid.left
-                    elif parent.left == current_bid:
-                        parent.left = current_bid.left
-                    else:
-                        parent.right = current_bid.left
-                elif current_bid.left == None and current_bid.right != None:
-                    if parent == None:
-                        current_bid = parent.right
-                    elif parent.left == current_bid:
-                        parent.left = current_bid.right
-                    else:
-                        parent.right = current_bid.right
-                else:
-                    successor = current_bid.right
-                    while successor.left is not None:
-                        successor = successor.left
-                    self.delete_bid(successor, current_bid.bid.bid_id)
-                return current_bid
-            elif current_bid.bid.bid_id < bid_id:
-                parent = current_bid
-                current_bid = current_bid.right
-            else:
-                parent = current_bid
-                current_bid = current_bid.left
+        # If bid_id passed in is smaller than root.
+        if bid_id < bid.bid.bid_id:
+            bid.left = self.delete_bid(bid.left, bid_id)
+        # If bid_id passed in is larger than root.
+        elif bid_id > bid.bid.bid_id:
+            bid.right = self.delete_bid(bid.right, bid_id)
+        # If bid_id matches the bid_id of the bid passed into the function
+        else:
+            # Two conditions handle if there is one or no children nodes to the root
+            if bid.left is None:
+                temp = bid.right
+                bid = None
+                return temp
+            elif bid.right is None:
+                temp = bid.left
+                bid = None
+                return temp
             
+            # if there are two children, the following code traverses the code to
+            # the smallest successor
+
+            temp = self.minimum_value_bid(bid.right)
+          
+            bid.bid = temp.bid
+            bid.right = self.delete_bid(bid.right, temp.bid.bid_id)
+        print("Outside return triggered")
+        return bid
+
+      
 
 if __name__ == "__main__":    
     bst = BinarySearchTree()
@@ -157,6 +155,7 @@ if __name__ == "__main__":
         print("  2. Display all Bids")
         print("  3. Find Bid")
         print("  4. Remove Bid")
+        print("  5. Create File")
         print("  9. Exit")
         user_choice = int(input("Enter your choice: "))
     
@@ -175,6 +174,14 @@ if __name__ == "__main__":
                 print("No bid found...")
         elif user_choice is 4:
             deleted_bid = int(input("Enter a Bid ID: "))
-            deleted_bid = bst.check_bid_for_deletion(bst.root, deleted_bid)
-            print(deleted_bid)
+            bst.root = bst.delete_bid(bst.root, deleted_bid)
+         
+        elif user_choice is 5:
+            file_name = input("Enter a file name: ")
+            labels = ["Auction ID", "Auction Title", "Fund", "Auction Fee Total"]
+            try:
+                file_output.create_csv(file_name, bst, labels)
+                print("File successfully created...")
+            except:
+                print("File creation failed...")
     

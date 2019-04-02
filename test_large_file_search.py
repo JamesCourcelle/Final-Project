@@ -17,12 +17,13 @@ class TestLargeFile(unittest.TestCase):
         list_bids = parse_csv.open_file(csv_path)
         
         self.assertEqual(bst.node_count, len(list_bids))
-        
+        print('\n')
         # clearing memory
         del bst
         del list_bids
         del csv_path
 
+    # Test delete ensures the delete_bid method works correctly. It also inadvertently tests the search_tree method.
     def test_delete(self):
         print("starting test_delete test...")
         bst = large_file_search.BinarySearchTree()
@@ -38,6 +39,13 @@ class TestLargeFile(unittest.TestCase):
         for i in test_nodes:
             deleted_bid = bst.check_bid_for_deletion(bst.root, i)
             self.assertEqual(bst.search_tree(i), None)
+        
+        print('\n')
+        # Clearing memory
+        del bst
+        del csv_path
+        del current_node
+        del test_nodes
 
 if __name__ == '__main__':
     unittest.main()
