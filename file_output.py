@@ -4,7 +4,9 @@ import parse_csv
 
 # Assistance with building function to create CSV files from https://pythonspot.com/files-spreadsheets-csv/
 
-# code takes in a file name, binary search tree, and labels when called. 
+# code takes in a file name, binary search tree, and labels when called. Uses Python's csv module
+# to open and close the the file writer. The program takes a file name, a BinarySearchTree and the labels
+# for each column in the outputted file. 
 def create_csv(file_name, source_code, labels):
     with open(file_name + '.csv', 'w', newline = '') as csv_file:
         file_writer = csv.writer(csv_file, delimiter = ',',
@@ -21,10 +23,3 @@ def create_csv(file_name, source_code, labels):
         
         export_bids(node)
 
-if __name__ == "__main__":
-    bst = large_file_search.BinarySearchTree()
-    csv_path = 'eBid_Monthly_Sales.csv'
-    bst.load_bids(csv_path)
-    labels = ["Auction ID", "Auction Title", "Fund", "Auction Fee Total"]
-
-    create_csv("test.csv", bst, labels)
