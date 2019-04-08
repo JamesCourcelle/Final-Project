@@ -49,7 +49,8 @@ class BinarySearchTree():
         if start > end:
             return None
         
-
+        # Code below sets the root as the middle most bid based on ID values. This process creates a balanced tree
+        # making the most efficient traversal.
         try:
             self.node_count += 1
             midpoint = int((start + end) / 2)
@@ -93,13 +94,14 @@ class BinarySearchTree():
     # deletion of the found bid along with validating the input.
     def check_bid_for_deletion(self, bid, bid_id):
         if self.search_tree(bid_id) is None:
-            print("deletion failed i think")
-            return "No bid found for deletion..."
+            print("No bid found for deletion...")
+            return None
         else:
-            print("Deletion triggered i think")
-            deleted_bid = self.delete_bid(bid, bid_id)
-            return "Bid successfully deleted..."
-
+            print("Bid successfully deleted...")
+            #deleted_bid = self.delete_bid(bid, bid_id)
+            return self.delete_bid(bid, bid_id)
+    
+    # Method used in delete_bid 
     def minimum_value_bid(self, bid):
         current_bid = bid
         while current_bid.left is not None:
@@ -139,7 +141,6 @@ class BinarySearchTree():
           
             bid.bid = temp.bid
             bid.right = self.delete_bid(bid.right, temp.bid.bid_id)
-        print("Outside return triggered")
         return bid
 
       
@@ -174,7 +175,7 @@ if __name__ == "__main__":
                 print("No bid found...")
         elif user_choice is 4:
             deleted_bid = int(input("Enter a Bid ID: "))
-            bst.root = bst.delete_bid(bst.root, deleted_bid)
+            bst.root = bst.check_bid_for_deletion(bst.root, deleted_bid)
          
         elif user_choice is 5:
             file_name = input("Enter a file name: ")
