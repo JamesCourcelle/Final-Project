@@ -83,12 +83,14 @@ if __name__ == "__main__":
 
         elif system_choice is 2:
             start_kill_mongod.start_mongod()
-            time.sleep(4)
+            time.sleep(2)
 
             
-            print("Exporting collection to CSV\n")
-            mongo_file_export.export_collection("test")
+            new_file_name = input("Enter a file name fore exporting: ")
+            mongo_file_export.export_collection(new_file_name)
+            time.sleep(2)
 
             # Killing the MongoDB database
             print("Shutting down MongdoDB database...\n")
             start_kill_mongod.kill_mongod()
+            print("")
