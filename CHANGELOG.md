@@ -13,5 +13,8 @@ Completed the addition of some unit tests to validate deletion and node count. C
 ## 04/03/2019
 Overhauled the deletion function due to errors with completing the delete operation. Rewrote code to be simplier and confirmed that it behaves as intended. Added basic file output feature that outputs the BST in its current state and is formated to only include the four fields passed in.
 
+## 04/08/2019
+Cleaned up some of the testing code in large_file_search.py. Also created main_menu class to better organize code moving foward with the database integration.
+
 # TODO
 Complete a basic MongoDB integration with CRUD operations available.
