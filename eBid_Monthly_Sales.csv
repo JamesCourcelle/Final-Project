@@ -1,4 +1,4 @@
-Auction Title,Auction ID,Department ,Close Date ,Winning Bid ,CC Fee,Fee Percent,Auction Fee Subtotal,Auction Fee Total,Pay Status ,Paid Date ,Asset #,Inventory ID,Decal /Vehicle ID,VTR Number,Receipt Number ,Cap,Expenses,Net Sales,Fund,Business Unit
+AuctionTitle,AuctionID,Department ,CloseDate ,WinningBid ,CCFee,FeePercent,AuctionFeeSubtotal,AuctionFeeTotal,PayStatus ,PaidDate ,AssetNumber,InventoryID,DecalVehicle ID,VTRNumber,ReceiptNumber ,Cap,Expenses,NetSales,Fund,BusinessUnit
 Dell Laptop w/Bag,79519,ITS,11/26/2013,$78.51 ,$1.81 ,0.23,$18.05 ,$18.05 ,Successful,1/3/2014,,74576,,,3603198592,"$3,000 ",$0.00 ,$60.45 ,General Fund,0
 21 Dell Optiplex 760 Computers,79530,ITS,11/26/2013,$451.51 ,$10.38 ,0.23,$103.84 ,$103.84 ,Successful,1/16/2014,,"75160, 75144, 75143, 75165, 75149, 75167, 75140, 75145, 75138, 75148, 75204, 75192, 75162, 75210, 75151, 75154, 75170, 75157, 75150, 75161, 75212",,,3604173051,"$3,000 ",$0.00 ,$347.66 ,General Fund,0
 "4 Asanti 24"" Chrome Rims",79539,DRUG TASK FORCE,11/27/2013,"$2,000.00 ",$0.00 ,0.23,$460.00 ,$460.00 ,Successful,1/2/2014,,TF-311-057,,,Cashiers Check,"$3,000 ",$0.00 ,"$1,540.00 ",Enterprise,0

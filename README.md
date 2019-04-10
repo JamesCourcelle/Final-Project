@@ -23,3 +23,7 @@ The current version of Python code starts the mongod.exe when you launch the mai
 * enter the command '''mongoimport -d CityData -c bids --type CSV --file eBid_Monthly_Sales.csv --headerline'''
 ![successful import](mongoimport.JPG)
 
+## mongoexport
+The mongoexport is handled by the Python program and does not require the user to interact with the command line.
+* When the database is created the C:\data\ directory is created. The export is dumped here.
+
