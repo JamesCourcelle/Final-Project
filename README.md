@@ -9,10 +9,17 @@ Project is currently using Python 3.7.0 32-bit
 Project is currently using MongoDB server version: 4.0.8
 Project is currently using MongoDB shell version v4.0.8
 
+## Installation and setup for MongoDB
 MongoDB server and shell can be downloaded and installed from [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mdb-edition)
 
 Follow the instructions to download the MongoDB Community Edition.
 It is recommended that you place the MongoDB install in C:\Program Files\ and that you create the database directory at C:\ and create a directory "\data\db"
 
 The current version of Python code starts the mongod.exe when you launch the main_menu.py. The main_menu.py also kills the mongod.exe server at the exiting of the program.
+
+### mongoimport
+* Copy the eBid_Monthly_Sales.csv to the bin folder that the mongod.exe is located. 
+* Launch a cmd window and navigate to the file location of the eBid_Monthly_Sales.csv
+* enter the command '''mongoimport -d CityData -c bids --type CSV --file eBid_Monthly_Sales.csv --headerline'''
+![successful import](mongoimport.JPG)
 
