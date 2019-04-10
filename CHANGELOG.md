@@ -16,5 +16,8 @@ Overhauled the deletion function due to errors with completing the delete operat
 ## 04/08/2019
 Cleaned up some of the testing code in large_file_search.py. Also created main_menu class to better organize code moving foward with the database integration.
 
+## 04/09/2019 - 04/10/2019
+Created start_kill_mongod.py to start the mongod.exe and server. Created a function to kill the server at the closing of the main_menu.py
+
 # TODO
 Complete a basic MongoDB integration with CRUD operations available.
