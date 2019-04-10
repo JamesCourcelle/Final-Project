@@ -5,4 +5,14 @@ From there, the user can display each entry of data sorted by ID number in ascen
 The user is also able to search for one entry with by entering the ID number associated with the entry.
 
 ## Dependencies
-This project is currently using Python 3.7.0 32-bit.
+Project is currently using Python 3.7.0 32-bit
+Project is currently using MongoDB server version: 4.0.8
+Project is currently using MongoDB shell version v4.0.8
+
+MongoDB server and shell can be downloaded and installed from [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mdb-edition)
+
+Follow the instructions to download the MongoDB Community Edition.
+It is recommended that you place the MongoDB install in C:\Program Files\ and that you create the database directory at C:\ and create a directory "\data\db"
+
+The current version of Python code starts the mongod.exe when you launch the main_menu.py. The main_menu.py also kills the mongod.exe server at the exiting of the program.
+
