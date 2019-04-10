@@ -1,10 +1,13 @@
-# TODO complete a menu to select between local file search and database
 from pathlib import Path
 import subprocess
+import time
+import os.path
+
 import large_file_search
 import parse_csv
 import start_kill_mongod
-import time
+import file_output
+import mongo_file_export
 
 
 if __name__ == "__main__":
@@ -15,13 +18,22 @@ if __name__ == "__main__":
         print("  1. Local File")
         print("  2. Database")
         print("  3. Exit")
-        system_choice = int(input("Enter your choice: "))
-        
+        try:
+            system_choice = int(input("Enter your choice: "))
+        except:
+            print("Please enter a valid input...\n")
+
+
         if system_choice is 1:
             bst = large_file_search.BinarySearchTree()
-            csv_path = 'eBid_Monthly_Sales.csv'
-            user_choice = 0
+            csv_path = input("Enter the file name including extension: ")
+            
+            # Validate that the file is in the currenty working directory.
+            if os.path.isfile(csv_path) is not True:
+                print("No file found...\n")
+                continue
 
+            user_choice = 0
 
             while user_choice is not 9:
                 print("Menu:")
@@ -31,7 +43,11 @@ if __name__ == "__main__":
                 print("  4. Remove Bid")
                 print("  5. Create File")
                 print("  9. Exit")
-                user_choice = int(input("Enter your choice: "))
+                try:
+                    user_choice = int(input("Enter your choice: "))
+                except:
+                    print("Please enter a valid input...\n")
+                    continue
     
                 if user_choice is 1:
                     bst.load_bids(csv_path)
@@ -39,7 +55,11 @@ if __name__ == "__main__":
                     node = bst.root
                     bst.display_all_bids(node)
                 elif user_choice is 3:
-                    search_bid = int(input("Enter a Bid ID: "))
+                    try:
+                        search_bid = int(input("Enter a Bid ID: "))
+                    except:
+                        print("Invalid input...\n")
+                        continue
                     found_bid = bst.search_tree(search_bid)
 
                     if found_bid is not None:
@@ -47,22 +67,28 @@ if __name__ == "__main__":
                     else:
                         print("No bid found...")
                 elif user_choice is 4:
-                    deleted_bid = int(input("Enter a Bid ID: "))
+                    try:
+                        deleted_bid = int(input("Enter a Bid ID: "))
+                    except:
+                        print("Invalid input...\n")
                     bst.root = bst.delete_bid(bst.root, deleted_bid)
          
                 elif user_choice is 5:
                     file_name = input("Enter a file name: ")
                     labels = ["Auction ID", "Auction Title", "Fund", "Auction Fee Total"]
-                    try:
-                        file_output.create_csv(file_name, bst, labels)
-                        print("File successfully created...")
-                    except:
-                        print("File creation failed...")
+                    
+                    file_output.create_csv(file_name, bst, labels)
+                    print("File successfully created...")
+
 
         elif system_choice is 2:
             start_kill_mongod.start_mongod()
             time.sleep(4)
 
+            
+            print("Exporting collection to CSV\n")
+            mongo_file_export.export_collection("test")
+
             # Killing the MongoDB database
-            print("Shutting down MongdoDB database...")
+            print("Shutting down MongdoDB database...\n")
             start_kill_mongod.kill_mongod()
