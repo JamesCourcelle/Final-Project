@@ -8,16 +8,17 @@ import parse_csv
 import start_kill_mongod
 import file_output
 import mongo_file_export
+import mongo_crud
 
 
 if __name__ == "__main__":
     system_choice = 0
 
-    while system_choice is not 3:
-        print("Load from local file or from database\n(database has more advanced querying)")
+    while system_choice is not 9:
+        print("Load from local file or from the database")
         print("  1. Local File")
         print("  2. Database")
-        print("  3. Exit")
+        print("  9. Exit")
         try:
             system_choice = int(input("Enter your choice: "))
         except:
@@ -83,12 +84,33 @@ if __name__ == "__main__":
 
         elif system_choice is 2:
             start_kill_mongod.start_mongod()
-            time.sleep(2)
+            time.sleep(0.25)
 
-            
-            new_file_name = input("Enter a file name fore exporting: ")
-            mongo_file_export.export_collection(new_file_name)
-            time.sleep(2)
+            mongo_choice = 0
+
+            while mongo_choice is not 9:
+                print("Menu:")
+                print("  1. Display all Bids")
+                print("  2. Find Bid")
+                print("  3. Remove Bid")
+                print("  4. Export Database to CSV")
+                print("  9. Exit")
+                try:
+                    mongo_choice = int(input("Enter your choice: "))
+                except:
+                    print("Please enter a valid input...\n")
+                    continue  
+                if mongo_choice == 2:
+                    try:
+                        search_bid = int(input("Enter a Bid ID: "))
+                    except:
+                        print("Invalid input...\n")
+                        continue
+                    mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+                if mongo_choice == 4:
+                    new_file_name = input("Enter a file name fore exporting: ")
+                    mongo_file_export.export_collection(new_file_name)
+                    time.sleep(2)
 
             # Killing the MongoDB database
             print("Shutting down MongdoDB database...\n")
