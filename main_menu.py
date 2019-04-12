@@ -72,7 +72,13 @@ if __name__ == "__main__":
                         deleted_bid = int(input("Enter a Bid ID: "))
                     except:
                         print("Invalid input...\n")
+                    
+                    if bst.search_tree(deleted_bid) is None:
+                        print("No bid found for deletion...")
+                        continue
+
                     bst.root = bst.delete_bid(bst.root, deleted_bid)
+                    print("Bid successfully deleted...")
          
                 elif user_choice is 5:
                     file_name = input("Enter a file name: ")
@@ -85,6 +91,9 @@ if __name__ == "__main__":
         elif system_choice is 2:
             start_kill_mongod.start_mongod()
             time.sleep(0.25)
+
+            # Ensures index for AuctionID is created
+            mongo_crud.create_index('localhost', 27017, 'CityData', 'bids', 'AuctionID', True)
 
             mongo_choice = 0
 
