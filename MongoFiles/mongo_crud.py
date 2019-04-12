@@ -47,6 +47,9 @@ def create_bid(host, port, udb, ucollection):
     db = connection [udb]
     collection = db[ucollection]
 
+    # Counter for the check_bid below to only run for the first iteration
+    counter = 0
+
     field_list = ["AuctionID", "AuctionTitle", "Fund", "AuctionFeeTotal"]
     new_bid = []
 
@@ -54,8 +57,10 @@ def create_bid(host, port, udb, ucollection):
         user_value = input("Enter {0}:  ".format(field))
         new_bid.append(user_value)
 
-        # Check if bid exists with AuctionID and stop creation if it does.
-        check_bid = find_bid(host, port, udb, ucollection, int(user_value))
+        if counter is 0:
+            # Check if bid exists with AuctionID and stop creation if it does.
+            check_bid = find_bid(host, port, udb, ucollection, int(user_value))
+            counter += 1
 
         if check_bid:
             print("Bid with that AuctionID already exists...")
