@@ -1,23 +1,17 @@
-from pathlib import Path
-import subprocess
 import time
 import os.path
 
-import large_file_search
-import parse_csv
-import start_kill_mongod
-import file_output
-import mongo_file_export
-
+from LocalFileProgram import file_output, large_file_search, parse_csv
+from MongoFiles import mongo_crud, mongo_file_export, start_kill_mongod
 
 if __name__ == "__main__":
     system_choice = 0
 
-    while system_choice is not 3:
-        print("Load from local file or from database\n(database has more advanced querying)")
+    while system_choice is not 9:
+        print("Load from local file or from the database")
         print("  1. Local File")
         print("  2. Database")
-        print("  3. Exit")
+        print("  9. Exit")
         try:
             system_choice = int(input("Enter your choice: "))
         except:
@@ -71,7 +65,13 @@ if __name__ == "__main__":
                         deleted_bid = int(input("Enter a Bid ID: "))
                     except:
                         print("Invalid input...\n")
+                    
+                    if bst.search_tree(deleted_bid) is None:
+                        print("No bid found for deletion...")
+                        continue
+
                     bst.root = bst.delete_bid(bst.root, deleted_bid)
+                    print("Bid successfully deleted...")
          
                 elif user_choice is 5:
                     file_name = input("Enter a file name: ")
@@ -83,12 +83,37 @@ if __name__ == "__main__":
 
         elif system_choice is 2:
             start_kill_mongod.start_mongod()
-            time.sleep(2)
+            time.sleep(0.25)
 
-            
-            new_file_name = input("Enter a file name fore exporting: ")
-            mongo_file_export.export_collection(new_file_name)
-            time.sleep(2)
+            # Ensures index for AuctionID is created
+            mongo_crud.create_index('localhost', 27017, 'CityData', 'bids', 'AuctionID')
+
+            mongo_choice = 0
+
+            while mongo_choice is not 9:
+                print("Menu:")
+                print("  1. Display all Bids")
+                print("  2. Find Bid")
+                print("  3. Remove Bid")
+                print("  4. Export Database to CSV")
+                print("  9. Exit")
+                try:
+                    mongo_choice = int(input("Enter your choice: "))
+                except:
+                    print("Please enter a valid input...\n")
+                    continue  
+                if mongo_choice == 2:
+                    try:
+                        search_bid = int(input("Enter a Bid ID: "))
+                    except:
+                        print("Invalid input...\n")
+                        continue
+                    found_bid = mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+                    mongo_crud.print_results(found_bid)
+                if mongo_choice == 4:
+                    new_file_name = input("Enter a file name fore exporting: ")
+                    mongo_file_export.export_collection(new_file_name)
+                    time.sleep(2)
 
             # Killing the MongoDB database
             print("Shutting down MongdoDB database...\n")
