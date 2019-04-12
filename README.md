@@ -10,6 +10,8 @@ Project is currently using MongoDB server version: 4.0.8
 Project is currently using MongoDB shell version v4.0.8
 
 ## Installation and setup for MongoDB
+#IMPORTANT!
+in order for this program to work correctly you have to create the \data\db directory in your C:/ drive for the database directory
 MongoDB server and shell can be downloaded and installed from [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mdb-edition)
 
 Follow the instructions to download the MongoDB Community Edition.

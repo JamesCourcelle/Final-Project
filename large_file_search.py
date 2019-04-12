@@ -5,10 +5,10 @@ import file_output
 
 class Bid():
     def __init__(self, bid):
-        self.bid_id = int(bid["Auction ID"])
-        self.title = bid["Auction Title"]
+        self.bid_id = int(bid["AuctionID"])
+        self.title = bid["AuctionTitle"]
         self.fund = bid["Fund"]
-        self.amount = bid["Auction Fee Total"]
+        self.amount = bid["AuctionFeeTotal"]
         
 class Node():
     def __init__(self, bid):
@@ -31,7 +31,7 @@ class BinarySearchTree():
         
         # Sorting the entries taken in from the CSV file so that the BST is balanced. This results
         # in the most efficient traversal of the BST when searching or deleting an entry.
-        sorted_list = sorted(list_bids, key=itemgetter("Auction ID"))
+        sorted_list = sorted(list_bids, key=itemgetter("AuctionID"))
         start = 0
         end = len(sorted_list) - 1
         print("%s files loaded..." % len(sorted_list))
@@ -89,17 +89,6 @@ class BinarySearchTree():
                 
             if current_node == None:
                 return None
-
-    # Function to check if a bid for deletion is found. This function acts as the actual
-    # deletion of the found bid along with validating the input.
-    def check_bid_for_deletion(self, bid, bid_id):
-        if self.search_tree(bid_id) is None:
-            print("No bid found for deletion...")
-            return None
-        else:
-            print("Bid successfully deleted...")
-            #deleted_bid = self.delete_bid(bid, bid_id)
-            return self.delete_bid(bid, bid_id)
     
     # Method used in delete_bid 
     def minimum_value_bid(self, bid):
