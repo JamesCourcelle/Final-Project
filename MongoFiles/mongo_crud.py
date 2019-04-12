@@ -1,7 +1,4 @@
-import json
-from bson import json_util
-import pprint
-import pymongo
+from os import abort
 from pymongo import MongoClient
 
 def print_results(values):
@@ -72,9 +69,8 @@ def create_bid(host, port, udb, ucollection):
     try:
         collection.insert_one(bid).inserted_id
         find_bid(host, port, udb, ucollection, int(new_bid[0]))
-    except ValidationError as ve:
-        abort(400, str(ve))
-
+    except:
+        abort(400, str("Error in process. Aborted."))
 
 
 def update_bid(host, port, udb, ucollection, bid_id):
@@ -102,8 +98,8 @@ def update_bid(host, port, udb, ucollection, bid_id):
                     user_value = input("Enter a new value: ")
                     update = {field : user_value}
                     collection.update_one({"AuctionID" : bid_id} , {"$set" : update})
-                except ValidationError as ve:
-                    abort(400, str(ve))
+                except:
+                    abort(400, str("Error in process. Aborted."))
 
                 loop_condition = False
             elif user_choice is 'N' or user_choice is 'n':
@@ -123,11 +119,12 @@ def delete_bid(host, port, udb, ucollection, bid_id):
         collection.delete_one({'AuctionID' : bid_id})
         print("Bid successfully removed from the database")
     except:
-        abort(400, str(ve))
+        abort(400, str("Error in process. Aborted."))
 
 if __name__ == '__main__':
-    #bid = int(input("Enter a bid ID: "))
-    #find_bid('localhost', 27017, 'CityData', 'bids', bid)
+    bid = int(input("Enter a bid ID: "))
+    found_bid = find_bid('localhost', 27017, 'CityData', 'bids', bid)
+    print(found_bid)
 
     #update_bid('localhost', 27017, 'CityData', 'bids', bid)
     #create_index('localhost', 27017, 'CityData', 'bids', 'AuctionID')

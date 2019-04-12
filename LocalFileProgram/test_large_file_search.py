@@ -1,7 +1,6 @@
-import large_file_search
-import parse_csv
+from LocalFileProgram import large_file_search, parse_csv
 import unittest
-import random
+
 
 class TestLargeFile(unittest.TestCase):
     # function to ensure the number of nodes match the number of entries in the CSV file.

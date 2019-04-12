@@ -1,15 +1,8 @@
-from pathlib import Path
-import subprocess
 import time
 import os.path
 
-import large_file_search
-import parse_csv
-import start_kill_mongod
-import file_output
-import mongo_file_export
-import mongo_crud
-
+from LocalFileProgram import file_output, large_file_search, parse_csv
+from MongoFiles import mongo_crud, mongo_file_export, start_kill_mongod
 
 if __name__ == "__main__":
     system_choice = 0
@@ -93,7 +86,7 @@ if __name__ == "__main__":
             time.sleep(0.25)
 
             # Ensures index for AuctionID is created
-            mongo_crud.create_index('localhost', 27017, 'CityData', 'bids', 'AuctionID', True)
+            mongo_crud.create_index('localhost', 27017, 'CityData', 'bids', 'AuctionID')
 
             mongo_choice = 0
 
@@ -115,7 +108,8 @@ if __name__ == "__main__":
                     except:
                         print("Invalid input...\n")
                         continue
-                    mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+                    found_bid = mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+                    mongo_crud.print_results(found_bid)
                 if mongo_choice == 4:
                     new_file_name = input("Enter a file name fore exporting: ")
                     mongo_file_export.export_collection(new_file_name)

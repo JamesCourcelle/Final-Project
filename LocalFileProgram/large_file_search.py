@@ -1,6 +1,5 @@
 from operator import itemgetter
-import parse_csv
-import file_output
+from LocalFileProgram import parse_csv
 
 
 class Bid():
