@@ -79,7 +79,6 @@ if __name__ == "__main__":
                     file_output.create_csv(file_name, bst, labels)
                     print("File successfully created...")
 
-
         elif system_choice is 2:
             start_kill_mongod.start_mongod()
             time.sleep(0.25)
@@ -111,7 +110,13 @@ if __name__ == "__main__":
                     except:
                         print("Invalid input...\n")
                         continue
+
                     found_bid = mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+
+                    # handles TypeError if found_bid returns None.
+                    if found_bid is None:
+                        continue
+
                     mongo_crud.print_results(found_bid)
                 if mongo_choice == 3:
                     try:
@@ -119,14 +124,32 @@ if __name__ == "__main__":
                     except:
                         print("Invalid input...\n")
                         continue
+
                     found_bid = mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+
                     # handles TypeError if found_bid returns None.
                     if found_bid is None:
                         continue
-                    mongo_crud.update_bid('localhost', 27017, 'CityData', 'bids', found_bid[0])
-                    mongo_crud.print_results(found_bid)
+
+                    mongo_crud.update_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+                    print("Update Successful...")
+                if mongo_choice == 4:
+                    try:
+                        search_bid = int(input("Enter a Bid ID: "))
+                    except:
+                        print("Invalid input...\n")
+                        continue
+
+                    found_bid = mongo_crud.find_bid('localhost', 27017, 'CityData', 'bids', search_bid)
+
+                    # handles TypeError if found_bid returns None.
+                    if found_bid is None:
+                        continue
+
+                    mongo_crud.delete_bid('localhost', 27017, 'CityData', 'bids', search_bid)
 
                 if mongo_choice == 5:
+                    # Exports the database to a CSV file located in 'C:\data\'
                     new_file_name = input("Enter a file name fore exporting: ")
                     mongo_file_export.export_collection(new_file_name)
                     time.sleep(2)

@@ -10,6 +10,7 @@ def export_collection(file_name):
 
     # Set the file name passed on what the user passes in.
     file = "C:\\data\\" + file_name + ".csv"
-    command = ("mongoexport --db CityData --collection bids --type=csv --fields AuctionID,AuctionTitle,Fund,AuctionFeeTotal --out %s" % (file))
+    command = ("mongoexport --db CityData --collection bids --type=csv --fields AuctionID,AuctionTitle,Fund,AuctionFeeTotal --out %s"
+               % (file))
 
     subprocess.run(command, creationflags = subprocess.CREATE_NEW_CONSOLE)

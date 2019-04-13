@@ -83,9 +83,6 @@ def update_bid(host, port, udb, ucollection, bid_id):
     db = connection [udb]
     collection = db[ucollection]
 
-    value = {"AuctionID" : bid_id}
-    bid = collection.find_one(value)
-
     field_list = ["AuctionTitle", "Fund", "AuctionFeeTotal"]
     
     # Check if bid exists before trying to update it.
@@ -117,8 +114,6 @@ def delete_bid(host, port, udb, ucollection, bid_id):
     db = connection [udb]
     collection = db[ucollection]
 
-    value = {"AuctionID" : bid_id}
-    bid = collection.find_one(value)
 
     try:
         collection.delete_one({'AuctionID' : bid_id})
