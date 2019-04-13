@@ -19,5 +19,5 @@ Cleaned up some of the testing code in large_file_search.py. Also created main_m
 ## 04/09/2019 - 04/10/2019
 Created start_kill_mongod.py to start the mongod.exe and server. Created a function to kill the server at the closing of the main_menu.py
 
-# TODO
-Complete a basic MongoDB integration with CRUD operations available.
+## 4/11/2019 - 04/12/2019
+Completed the PyMongo code for the basic CRUD commands and index creation. Updated and integrated these commands into the main_menu.py
