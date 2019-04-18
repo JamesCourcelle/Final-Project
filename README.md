@@ -24,9 +24,9 @@ Follow the instructions to download the MongoDB Community Edition.
 The current version of Python code starts the mongod.exe when you launch the main_menu.py. The main_menu.py also kills the mongod.exe server at the exiting of the program.
 
 ### mongoimport
-The only action needed by the user to import the eBid_Monthly_Sales.csv is to move the csv file to the directory. The program handles creating the directory and the database without user input.
+The only action needed by the user to import the eBid_Monthly_Sales.csv is to move the csv file to the appropriate directory. The program handles creating the directory and the database without user input.
 
-USER MUST MOVE eBid_Monthly_Sales.csv TO ```C:\Program Files\MongoDB\Server\4.0\bin```
+USER MUST MOVE eBid_Monthly_Sales.csv TO ```C:\Program Files\MongoDB\Server\4.0\bin``` (This location only exists after MongoDB is installed to the proper directory)
 
 ## mongoexport
 The mongoexport is handled by the Python program and does not require the user to interact with the command line.
