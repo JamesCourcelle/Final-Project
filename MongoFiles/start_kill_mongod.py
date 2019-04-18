@@ -22,7 +22,7 @@ def start_mongod():
                     print("Invalid input...")
 
         directory_loop = True
-        while(directory_loop):
+        while directory_loop:
             print("Is the database directory located at C:\\data\\db?")
             default_directory = input("Y/N: ")
 
