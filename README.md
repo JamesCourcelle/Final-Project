@@ -6,8 +6,11 @@ The user is also able to search for one entry with by entering the ID number ass
 
 ## Dependencies
 Project is currently using Python 3.7.0 32-bit
+
 Project is currently using MongoDB server version: 4.0.8
+
 Project is currently using MongoDB shell version v4.0.8
+
 MUST BE USING WINDOWS OS
 
 ## Installation and setup for MongoDB
