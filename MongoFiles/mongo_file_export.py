@@ -1,6 +1,6 @@
 import subprocess
 import os
-from pathlib import Path
+
 
 
 def export_collection(file_name):

@@ -2,7 +2,7 @@ import time
 import os.path
 
 from LocalFileProgram import file_output, large_file_search, parse_csv
-from MongoFiles import mongo_crud, mongo_file_export, start_kill_mongod
+from MongoFiles import mongo_crud, mongo_file_export, start_kill_mongod, check_for_database
 
 if __name__ == "__main__":
     system_choice = 0
@@ -86,6 +86,8 @@ if __name__ == "__main__":
             # Ensures index for AuctionID is created
             mongo_crud.create_index('localhost', 27017, 'CityData', 'bids', 'AuctionID')
 
+            check_for_database.check_for_database('localhost', 27017, 'CityData')
+            
             mongo_choice = 0
 
             while mongo_choice is not 9:
@@ -102,9 +104,9 @@ if __name__ == "__main__":
                     print("Please enter a valid input...\n")
                     continue
 
-                if mongo_choice == 1:
+                if mongo_choice is 1:
                     mongo_crud.create_bid('localhost', 27017, 'CityData', 'bids')
-                if mongo_choice == 2:
+                if mongo_choice is 2:
                     try:
                         search_bid = int(input("Enter a Bid ID: "))
                     except:
@@ -118,7 +120,7 @@ if __name__ == "__main__":
                         continue
 
                     mongo_crud.print_results(found_bid)
-                if mongo_choice == 3:
+                if mongo_choice is 3:
                     try:
                         search_bid = int(input("Enter a Bid ID: "))
                     except:
@@ -133,7 +135,7 @@ if __name__ == "__main__":
 
                     mongo_crud.update_bid('localhost', 27017, 'CityData', 'bids', search_bid)
                     print("Update Successful...")
-                if mongo_choice == 4:
+                if mongo_choice is 4:
                     try:
                         search_bid = int(input("Enter a Bid ID: "))
                     except:
@@ -148,7 +150,7 @@ if __name__ == "__main__":
 
                     mongo_crud.delete_bid('localhost', 27017, 'CityData', 'bids', search_bid)
 
-                if mongo_choice == 5:
+                if mongo_choice is 5:
                     # Exports the database to a CSV file located in 'C:\data\'
                     new_file_name = input("Enter a file name fore exporting: ")
                     mongo_file_export.export_collection(new_file_name)
