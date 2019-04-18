@@ -13,7 +13,8 @@ def create_index(host, port, udb, ucollection, field):
     collection = db[ucollection]
 
     collection.create_index(field)
-    print("Index created for AuctionID...")
+    print('Index created for AuctionID...')
+
 
 def find_bid(host, port, udb, ucollection, bid_id):
     connection = MongoClient(host, port)

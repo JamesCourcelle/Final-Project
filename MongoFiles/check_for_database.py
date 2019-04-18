@@ -11,18 +11,19 @@ def check_for_database(host, port, db_name):
 
     if db_name in database_name:
         print("{0} found...".format(db_name))
+        return None
     else:
         os.chdir('C:\\')
         try:
             os.mkdir("\\data\\db")
             print("Directory successfully created...")
         except OSError:
-            print("Directory creation failed...")
+            print("Directory already exists...")
 
         try:
             os.chdir('C:\\Program Files\\MongoDB\\Server\\4.0\\bin')
 
-            command = ("mongoimport -d CityData -c bids --type CSV --file eBid_Monthly_Sales.csv --headerline")
+            command = "mongoimport -d CityData -c bids --type CSV --file eBid_Monthly_Sales.csv --headerline"
 
             subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_CONSOLE)
             print("Database successfully created...")

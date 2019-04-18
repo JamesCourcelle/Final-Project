@@ -1,15 +1,15 @@
 from pathlib import Path
 import subprocess
-import time
+
 
 def start_mongod():
     # Code below starts up MongoDB database for the user.
     try:
         path_loop = True
-        while(path_loop):
+        while path_loop:
             print("Is your mongod.exe C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongod.exe?")
             default_path = input("Y/N: ")
-    
+
             if default_path is 'Y' or default_path is 'y':
                 exe_location = Path("C:/Program Files/MongoDB/Server/4.0/bin/mongod.exe")
                 path_loop = False
@@ -26,7 +26,7 @@ def start_mongod():
             print("Is the database directory located at C:\\data\\db?")
             default_directory = input("Y/N: ")
 
-            if default_directory is 'Y' or  default_directory is'y':
+            if default_directory is 'Y' or default_directory is 'y':
                 directory_location = Path("C:/data/db")
                 directory_loop = False
             else:
@@ -41,18 +41,14 @@ def start_mongod():
 
         # Creating a process that allows other processes to continue while this runs. 
         # mongod.exe runs in a seperate console.
-        subprocess.Popen(command, creationflags = subprocess.CREATE_NEW_CONSOLE)
-        
-        
-        
+        subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_CONSOLE)
+
+
+
     except:
         print("Database failed to start...")
+
 
 # Function to kill the mongod.exe and stop the MongoDB batabase
 def kill_mongod():
     subprocess.run("taskkill /f /im mongod.exe")
-
-if __name__ == "__main__":
-    start_mongod()
-    time.sleep(4)
-    kill_mongod()
