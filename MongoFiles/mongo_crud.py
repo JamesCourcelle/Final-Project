@@ -26,7 +26,7 @@ def find_bid(host, port, udb, ucollection, bid_id):
         {"$project": {"AuctionID": 1, "AuctionTitle": 1, "Fund": 1, "AuctionFeeTotal": 1, "_id": 0}}
     ]
 
-    # Convert the pipline values to a printable format
+    # Convert the pipeline values to a printable format
     cursor = collection.aggregate(pipeline)
     results = list(cursor)
 

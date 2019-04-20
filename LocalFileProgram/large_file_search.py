@@ -76,7 +76,7 @@ class BinarySearchTree():
             # This is statement handles if a bid has been deleted.
             if current_node.bid is None:
                 return None
-            if search_bid is current_node.bid.bid_id:
+            if search_bid == current_node.bid.bid_id:
                 return current_node
             elif search_bid < current_node.bid.bid_id:
                 current_node = current_node.left
