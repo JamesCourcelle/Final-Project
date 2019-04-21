@@ -25,6 +25,8 @@ if __name__ == "__main__":
             if os.path.isfile(csv_path) is not True:
                 print("No file found...\n")
                 continue
+            else:
+                print("File found...")
 
             user_choice = 0
 
@@ -161,5 +163,6 @@ if __name__ == "__main__":
 
             # Killing the MongoDB database
             print("Shutting down MongdoDB database...\n")
+            time.sleep(0.25)
             start_kill_mongod.kill_mongod()
             print("")
