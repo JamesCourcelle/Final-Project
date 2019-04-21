@@ -11,6 +11,9 @@ Project is currently using MongoDB server version: 4.0.8
 
 Project is currently using MongoDB shell version v4.0.8
 
+Project uses the current version of PyMonogo. To install PyMongo, open a Command Prompt and enter the following line
+```python -m pip install pymongo```
+
 MUST BE USING WINDOWS OS
 
 ## Installation and setup for MongoDB
