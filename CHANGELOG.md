@@ -21,3 +21,6 @@ Created start_kill_mongod.py to start the mongod.exe and server. Created a funct
 
 ## 4/11/2019 - 04/12/2019
 Completed the PyMongo code for the basic CRUD commands and index creation. Updated and integrated these commands into the main_menu.py
+
+## 4/13/2019 - 4/21/2019
+Additional features have been added to complete more dynamic searching in the database and the exporting of the database to a csv file. The project file structure has been reorganized to better understand the flow of the project. Major refactoring and code clean-up has been completed to have a more polished final product.
